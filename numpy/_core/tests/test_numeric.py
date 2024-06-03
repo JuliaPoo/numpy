@@ -324,6 +324,11 @@ class TestNonarrayArgs:
         out = np.take(a, indices)
         assert_equal(out, tgt)
 
+    def test_take_32_64(self):
+        x32 = np.ones(2, dtype=np.int32)
+        x64 = np.ones(2, dtype=np.int64)
+        np.take(x32, x64)
+
     def test_trace(self):
         c = [[1, 2], [3, 4], [5, 6]]
         assert_equal(np.trace(c), 5)
