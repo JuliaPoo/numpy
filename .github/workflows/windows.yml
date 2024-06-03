@@ -112,4 +112,4 @@ jobs:
       - name: Run test suite (fast)
         run: |
           cd tools
-          python -m pytest ../numpy/_core/tests/test_numeric.py::TestNonarrayArgs::test_take_32_64
+          python -m pytest --pyargs numpy -m "not slow" -n2
