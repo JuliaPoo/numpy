@@ -7,6 +7,7 @@
 #include <structmember.h>
 
 #include "numpy/arrayobject.h"
+#include "arrayobject.h"
 #include "numpy/arrayscalars.h"
 
 #include "numpy/npy_math.h"
