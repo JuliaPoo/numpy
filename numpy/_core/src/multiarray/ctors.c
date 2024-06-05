@@ -1908,6 +1908,10 @@ PyArray_FromArray(PyArrayObject *arr, PyArray_Descr *newtype, int flags)
         newtype->elsize = oldtype->elsize;
     }
 
+    if (flags & NPY_ARRAY_SAME_KIND_CASTING) {
+        casting = NPY_SAME_KIND_CASTING;
+    }
+
     /* If the casting if forced, use the 'unsafe' casting rule */
     if (flags & NPY_ARRAY_FORCECAST) {
         casting = NPY_UNSAFE_CASTING;
