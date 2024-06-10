@@ -49,7 +49,7 @@ jobs:
 
   smoke_test:
     # To enable this job on a fork, comment out:
-    # if: github.repository == 'numpy/numpy'
+    if: github.repository == 'numpy/numpy'
     runs-on: ubuntu-latest
     env:
       MESON_ARGS: "-Dallow-noblas=true -Dcpu-baseline=none -Dcpu-dispatch=none"
@@ -115,7 +115,7 @@ jobs:
 
   full:
     # Build a wheel, install it, then run the full test suite with code coverage
-    needs: [smoke_test]
+    # needs: [smoke_test]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
