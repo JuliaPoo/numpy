@@ -145,7 +145,7 @@ jobs:
         pip install -e . --no-build-isolation
     - name: Run full test suite
       run: |
-        pytest numpy
+        pytest --pyargs numpy --cov-report=html:build/coverage
         # TODO: gcov
 
   benchmark:
