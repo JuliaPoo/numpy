@@ -115,7 +115,7 @@ jobs:
 
   full:
     # Build a wheel, install it, then run the full test suite with code coverage
-    needs: [smoke_test]
+    # needs: [smoke_test]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -142,11 +142,9 @@ jobs:
       env:
         PKG_CONFIG_PATH: ${{ github.workspace }}/.openblas
       run: |
-        python -m build --wheel --no-isolation --skip-dependency-check
-        pip install dist/numpy*.whl
+        pip install -e . --no-build-isolation
     - name: Run full test suite
       run: |
-        cd tools
         pytest --pyargs numpy --cov-report=html:build/coverage
         # TODO: gcov
 
