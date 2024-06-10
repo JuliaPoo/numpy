@@ -29,7 +29,7 @@ permissions:
 jobs:
   lint:
     # To enable this job and subsequent jobs on a fork, comment out:
-    if: github.repository == 'numpy/numpy' && github.event_name != 'push'
+    # if: github.repository == 'numpy/numpy' && github.event_name != 'push'
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -142,12 +142,10 @@ jobs:
       env:
         PKG_CONFIG_PATH: ${{ github.workspace }}/.openblas
       run: |
-        python -m build --wheel --no-isolation --skip-dependency-check
-        pip install dist/numpy*.whl
+        pip install -e . --no-build-isolation
     - name: Run full test suite
       run: |
-        cd tools
-        pytest --pyargs numpy --cov-report=html:build/coverage
+        pytest numpy
         # TODO: gcov
 
   benchmark:
