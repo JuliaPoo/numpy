@@ -85,7 +85,7 @@ jobs:
     name: MSVC, 32-bit Python, no BLAS
     runs-on: windows-2019
     # To enable this job on a fork, comment out:
-    if: github.repository == 'numpy/numpy'
+    # if: github.repository == 'numpy/numpy'
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -115,4 +115,5 @@ jobs:
       - name: Run test suite (fast)
         run: |
           cd tools
-          python -m pytest --pyargs numpy -m "not slow" -n2
+          python test_26775.py
+      # python -m pytest --pyargs numpy -m "not slow" -n2
