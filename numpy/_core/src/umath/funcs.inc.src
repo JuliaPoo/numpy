@@ -177,35 +177,8 @@ npy_ObjectTrunc(PyObject *obj) {
 static PyObject *
 npy_ObjectGCD(PyObject *i1, PyObject *i2)
 {
-    PyObject *gcd = NULL;
-
-    /* use math.gcd if valid on the provided types */
-    {
-        gcd = PyObject_CallFunction(npy_static_pydata.math_gcd_func,
+    return PyObject_CallFunction(npy_static_pydata.math_gcd_func,
                                     "OO", i1, i2);
-        if (gcd != NULL) {
-            return gcd;
-        }
-        /* silence errors, and fall back on pure-python gcd */
-        PyErr_Clear();
-    }
-
-    /* otherwise, use our internal one, written in python */
-    {
-        npy_cache_import("numpy._core._internal", "_gcd",
-                         &npy_thread_unsafe_state.internal_gcd_func);
-        if (npy_thread_unsafe_state.internal_gcd_func == NULL) {
-            return NULL;
-        }
-        gcd = PyObject_CallFunction(npy_thread_unsafe_state.internal_gcd_func,
-                                    "OO", i1, i2);
-        if (gcd == NULL) {
-            return NULL;
-        }
-        /* _gcd has some unusual behaviour regarding sign */
-        Py_SETREF(gcd, PyNumber_Absolute(gcd));
-        return gcd;
-    }
 }
 
 static PyObject *
