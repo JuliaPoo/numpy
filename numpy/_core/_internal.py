@@ -858,12 +858,6 @@ def _prod(a):
         p *= x
     return p
 
-def _gcd(a, b):
-    """Calculate the greatest common divisor of a and b"""
-    while b:
-        a, b = b, a % b
-    return a
-
 def _lcm(a, b):
     return a // _gcd(a, b) * b
 
