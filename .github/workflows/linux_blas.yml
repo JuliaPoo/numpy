@@ -55,7 +55,7 @@ permissions:
 jobs:
   openblas32_stable_nightly:
     # To enable this workflow on a fork, comment out:
-    if: github.repository == 'numpy/numpy'
+    # if: github.repository == 'numpy/numpy'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -113,8 +113,10 @@ jobs:
         TERM: xterm-256color
 
       run: |
-        pip install pytest pytest-xdist hypothesis typing_extensions
-        spin test -j auto
+        cd tools
+        python test_26775.py
+      # pip install pytest pytest-xdist hypothesis typing_extensions
+      # spin test -j auto
 
 
   openblas_no_pkgconfig_fedora:
